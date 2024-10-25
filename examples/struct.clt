@@ -1,0 +1,45 @@
+
+struct Toto {
+    Int     a
+    Int     b
+    String  c
+
+    func init (Toto* this, Int a, Int b, String c) -> Void | (BadValueErr, DivByZeroErr) {
+        // Err -> general purpose error
+        // Or (*all errors)
+        if a == 1 {
+            return BadValueErr("a can't be 1")
+        }
+        if b == 0 {
+            return DivByZeroErr("b can't be 0")
+        }
+        print(a / b)
+        this.a = a    
+        this.b = b
+        this.c = c
+    }
+}
+
+
+struct <T1, T2> ParamStruct {
+    T1 a
+    T2 b
+
+    func ParamStruct (ParamStruct* this, T1 a, T2, b) -> Void | Err {
+        this.a = a;
+        this.b = b;
+    }
+}
+
+func main () -> Void | Err {
+    t = toto(2, 2, "test")
+    if ?t {
+        print(?t)
+    } 
+
+    p = <Int, Bool>ParamStruct(1, False)
+    if ?p {
+        return Err
+    }
+    print(p.a) // -> 1
+}
