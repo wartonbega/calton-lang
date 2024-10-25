@@ -26,20 +26,37 @@ struct <T1, T2> ParamStruct {
     T2 b
 
     func ParamStruct (ParamStruct* this, T1 a, T2, b) -> Void | Err {
-        this.a = a;
-        this.b = b;
+        this.a = a
+        this.b = b
+    }
+}
+
+struct Vec2 {
+    Int x
+    Int y
+
+    func ParamStruct(Vec2* this, Int x, Int y) -> Void | . {
+        // No errors
+        this.x = x
+        this.y = y
     }
 }
 
 func main () -> Void | Err {
-    t = toto(2, 2, "test")
+    let t = toto(2, 2, "test")
     if ?t {
         print(?t)
     } 
 
-    p = <Int, Bool>ParamStruct(1, False)
+    let p = <Int, Bool>ParamStruct(1, False)
     if ?p {
         return Err
     }
     print(p.a) // -> 1
+
+    mut v = Vec2(1, 2)
+    v = Vec2:{1, 2} // Casting from anonymous struct to Vec2
+    
+
+    p = {1, 2} // anonymous struct
 }

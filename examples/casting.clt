@@ -1,0 +1,11 @@
+
+func main () -> Void | Err {
+    let a = 10 // Type : Int
+
+    let b = Int32:a // Casting de Int -> Int32
+
+    v = Vec2:{1, 2} // Casting de anonymous struct a Vec2
+
+    let c = 'C' // type : Char
+    let d = Int:c // Casting de Char -> Int (d = 'A' + 3)
+}
