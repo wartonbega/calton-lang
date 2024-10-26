@@ -1,0 +1,46 @@
+// Importation de module, rennomage au besoin avec #
+incl module.submodule # smd 
+
+// Declaration de fonction avec types de retour et erreurs possibles
+// Err engloble tous les types d'erreurs
+func toto (Int x, Int y) -> Float | DivByZeroErr {
+    if y == 0 {
+        DivByZeroErr("Y != 0")
+    }
+    return x / y
+}
+
+enum types {
+    Char
+    Int 
+    Float
+    Bool
+    String { // avec des sous valeurs possibles
+        Int size,
+        Void* begin
+    }
+}
+
+func main () -> Void | Err {
+    let r = toto(1, 2)
+
+    if ?r {
+        print("There was an error")
+        return Err(?r)  // Return the error in r
+    }
+
+    for i in 0..10 {
+        // i is mutable (?)
+        print(i)
+    }
+
+    let buff = new(Int, 64) // Alloué sur le stack (64 elements)
+    //      Ou encore 'let buff = &(Int, 64)' 
+    // le type est &Int
+    let slice = buff[0..16]
+
+    let var1 = "Hello World"
+    let type1 = types.String{var1.len(), Void*:var1.begin()}
+    let var2 = 69
+    let type2 = types.Int
+}
